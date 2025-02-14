@@ -1,9 +1,11 @@
 import React from 'react'
 import jobs from '../jobs.json'
-import Job from './Job.tsx'
+import Job from './Job'
+
 
 function JobListings() {
-    console.log(jobs)
+    const first_3_jobs = jobs.slice(0,3)
+    
   return (
     <>
     <section className="bg-blue-50 px-4 py-10">
@@ -12,7 +14,7 @@ function JobListings() {
             Browse Jobs
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {jobs.map((job) =>(
+            {first_3_jobs.map((job) =>(
                 <Job key={job.id} job={job}/>
                 
 
