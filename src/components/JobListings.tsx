@@ -1,12 +1,32 @@
-import jobs from '../jobs.json';
+import { useEffect, useState } from 'react';
 import Job from './Job';
+import Spinner from './Spinner';
 
 
 function JobListings({ isHome = false }: { isHome?: boolean }) {
 
-  const isHomeChecker = isHome  ? jobs.slice(0,3) : jobs;
+  const [jobs, setJobs] = useState([]);
+  const [loading,setLoading] = useState(true);
 
-    
+  useEffect(() => {
+    const fecthJobs = async() => {
+      const ApiUrl = isHome ? 'http://localhost:8000/jobs?limit=3' : 'http://localhost:8000/jobs'
+      try{
+      const res = await fetch(ApiUrl)
+      console.log("oi", ApiUrl)
+      const data = await res.json();
+      setJobs(data)
+      }
+      catch (error)
+      {
+        console.log("Qual erro ", error)
+      }finally{
+        setLoading(false)
+      }
+    }
+    fecthJobs();
+  }, []);
+
   return (
     <>
     <section className="bg-blue-50 px-4 py-10">
@@ -15,13 +35,20 @@ function JobListings({ isHome = false }: { isHome?: boolean }) {
             Browse Jobs
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {isHomeChecker.map((job) =>(
+            {loading ? (<Spinner loading={loading}/>) :  (
+              <>
+              {jobs.map((job) =>(
                 <Job key={job.id} job={job}/>
                 
 
-            ) )}
+            ))}
+            </>
+          )}
+            
 
           </div>
+
+          
         </div>
       </section>
     </>
