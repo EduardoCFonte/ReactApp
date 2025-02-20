@@ -1,10 +1,11 @@
-import React from 'react'
-import jobs from '../jobs.json'
-import Job from './Job'
+import jobs from '../jobs.json';
+import Job from './Job';
 
 
-function JobListings() {
-    const first_3_jobs = jobs.slice(0,3)
+function JobListings({ isHome = false }: { isHome?: boolean }) {
+
+  const isHomeChecker = isHome  ? jobs.slice(0,3) : jobs;
+
     
   return (
     <>
@@ -14,7 +15,7 @@ function JobListings() {
             Browse Jobs
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {first_3_jobs.map((job) =>(
+            {isHomeChecker.map((job) =>(
                 <Job key={job.id} job={job}/>
                 
 

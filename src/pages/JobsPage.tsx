@@ -1,8 +1,13 @@
-import React from 'react'
+import FootStep from '../components/FootStep'
+import JobListings from '../components/JobListings'
 
 const JobsPage = () => {
+
   return (
-    <div>JobsPage</div>
+    <>
+    <JobListings />
+    <FootStep />
+    </>
   )
 }
 
