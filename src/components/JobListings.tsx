@@ -10,7 +10,7 @@ function JobListings({ isHome = false }: { isHome?: boolean }) {
 
   useEffect(() => {
     const fecthJobs = async() => {
-      const ApiUrl = isHome ? 'http://localhost:8000/jobs?limit=3' : 'http://localhost:8000/jobs'
+      const ApiUrl = isHome ? '/api/jobs?_limit=3' : 'api/jobs'
       try{
       const res = await fetch(ApiUrl)
       console.log("oi", ApiUrl)
